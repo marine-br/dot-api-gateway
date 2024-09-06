@@ -1,12 +1,29 @@
 package main
 
-// "github.com/sigespweb22/gogate-api/internal/middlewares"
-// "github.com/sigespweb22/gogate-api/internal/proxy"
-// "github.com/sigespweb22/gogate-api/internal/server"
-// "github.com/go-chi/chi/v5/middleware"
+import (
+	"fmt"
+	"log"
+	"os"
 
-import "fmt"
+	"dot-gogat-api/internal/server"
+
+	"github.com/gin-gonic/gin"
+)
 
 func main() {
-	fmt.Println("Api Gateway")
+	fmt.Println("Api Gateway DoTelematics")
+
+	r := gin.Default()
+	r.SetTrustedProxies(nil)
+
+	port := os.Getenv("PORT")
+	if port == "" {
+		port = "8080"
+	}
+
+	server.RegisterRoutes(r)
+
+	if err := r.Run(":" + port); err != nil {
+		log.Fatalf("Erro ao iniciar o servidor: %v", err)
+	}
 }
