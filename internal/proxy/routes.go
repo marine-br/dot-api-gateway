@@ -8,8 +8,8 @@ type Route struct {
 
 var routes = []Route{
 
-	{Method: "GET", Pattern: "/api/v1/service1", Backend: "http://service-1:8080"},
-	{Method: "POST", Pattern: "/api/v1/service2", Backend: "http://service-2:8080"},
+	{Method: "GET", Pattern: "/api/v1/users", Backend: "https://jsonplaceholder.typicode.com/users"},
+	{Method: "POST", Pattern: "/api/v1/posts", Backend: "https://jsonplaceholder.typicode.com/posts"},
 }
 
 func FindBackend(method, path string) (string, bool) {
