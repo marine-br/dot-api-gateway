@@ -2,12 +2,12 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 
 	"dot-gogat-api/internal/server"
 
 	"github.com/gin-gonic/gin"
+	"github.com/marine-br/golib-logger/logger"
 )
 
 func main() {
@@ -24,6 +24,6 @@ func main() {
 	server.RegisterRoutes(r)
 
 	if err := r.Run(":" + port); err != nil {
-		log.Fatalf("Erro ao iniciar o servidor: %v", err)
+		logger.Error("Erro ao iniciar o servidor: %v", err)
 	}
 }
