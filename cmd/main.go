@@ -11,19 +11,20 @@ import (
 )
 
 func main() {
-	fmt.Println("Api Gateway DoTelematics")
+	logger.Success("Api Gateway DoTelematics")
 
 	r := gin.Default()
 	r.SetTrustedProxies(nil)
 
-	port := os.Getenv("PORT")
+	port := os.Getenv("APP_PORT")
 	if port == "" {
 		port = "8080"
+		logger.Log(fmt.Sprintf("Listenig port: %v", port))
 	}
 
 	server.RegisterRoutes(r)
 
 	if err := r.Run(":" + port); err != nil {
-		logger.Error("Erro ao iniciar o servidor: %v", err)
+		logger.Error(fmt.Sprintf("Erro ao iniciar o servidor: %d", err))
 	}
 }
