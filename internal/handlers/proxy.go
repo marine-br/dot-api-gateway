@@ -5,21 +5,34 @@ import (
 	"io"
 	"net/http"
 	"strings"
+	"sync/atomic"
 
 	"dot-gogat-api/internal/services"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hashicorp/consul/api"
 	"github.com/marine-br/golib-logger/logger"
 )
 
 type ProxyHandler struct {
 	consulService *services.ConsulService
+	currentIndex  uint32
 }
 
 func NewProxyHandler(consulService *services.ConsulService) *ProxyHandler {
 	return &ProxyHandler{
 		consulService: consulService,
+		currentIndex:  0,
 	}
+}
+
+func (h *ProxyHandler) selectService(services []*api.ServiceEntry) *api.ServiceEntry {
+	if len(services) == 0 {
+		return nil
+	}
+
+	index := atomic.AddUint32(&h.currentIndex, 1) % uint32(len(services))
+	return services[int(index)]
 }
 
 func (h *ProxyHandler) HandleProxy(c *gin.Context) {
@@ -43,8 +56,19 @@ func (h *ProxyHandler) HandleProxy(c *gin.Context) {
 		return
 	}
 
-	// Seleciona o primeiro serviço disponível (pode ser implementado um load balancer aqui)
-	service := services[0]
+	// Seleciona por round-robin
+	service := h.selectService(services)
+	if service == nil {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "no healthy services available"})
+		return
+	}
+
+	// Verifica se o serviço está saudável
+	if service.Checks.AggregatedStatus() != api.HealthPassing {
+		c.JSON(http.StatusServiceUnavailable, gin.H{"error": "service is not healthy"})
+		return
+	}
+
 	serviceURL := fmt.Sprintf("http://%s:%d", service.Service.Address, service.Service.Port)
 
 	// Constrói a URL completa para o proxy

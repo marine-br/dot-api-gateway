@@ -31,12 +31,6 @@ type Config struct {
 
 func LoadConfig() *Config {
 	validator := env_validator.NewEnvValidator()
-	servicePort, err := strconv.Atoi(validator.Default("CONSUL_SERVICE_PORT", "8080"))
-
-	if err != nil {
-		panic(fmt.Errorf("failed to convert CONSUL_SERVICE_PORT to int: %w", err))
-	}
-
 	rateLimitLimit, err := strconv.Atoi(validator.Default("RATE_LIMIT_LIMIT", "100"))
 
 	if err != nil {
@@ -64,10 +58,7 @@ func LoadConfig() *Config {
 			ServiceHost string
 			ServicePort int
 		}{
-			Address:     validator.Exists("CONSUL_ADDRESS"),
-			ServiceName: validator.Exists("CONSUL_SERVICE_NAME"),
-			ServiceHost: validator.Exists("CONSUL_SERVICE_HOST"),
-			ServicePort: servicePort,
+			Address: validator.Exists("CONSUL_ADDRESS"),
 		},
 		RateLimit: struct {
 			Enabled bool

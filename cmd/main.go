@@ -19,12 +19,6 @@ func main() {
 		return
 	}
 
-	err = consulService.Register(
-		config.Consul.ServiceName,
-		config.Consul.ServiceHost,
-		config.Consul.ServicePort,
-	)
-
 	if err != nil {
 		logger.Error(fmt.Sprintf("Failed to register service in Consul: %v", err))
 		return

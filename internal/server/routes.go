@@ -18,7 +18,6 @@ func RegisterRoutes(r *gin.Engine, consulService *services.ConsulService) {
 	v1 := r.Group("/v1")
 	{
 		routes.RegisterAuthRoutes(v1)
-
 		protected := v1.Group("")
 		protected.Use(middlewares.AuthMiddleware(config.JWT.SecretKey))
 		routes.RegisterProxyRoutes(protected, consulService)
