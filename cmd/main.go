@@ -35,8 +35,10 @@ func main() {
 	}
 
 	logger.Success("API Gateway Starting...")
-	r := gin.Default()
+	r := gin.New()
+	r.Use(gin.Recovery())
 	r.SetTrustedProxies(nil)
+
 	server.RegisterRoutes(r, consulService)
 	logger.Log(fmt.Sprintf("Server starting on port: %s", config.Port))
 

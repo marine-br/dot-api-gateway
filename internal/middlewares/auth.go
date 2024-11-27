@@ -10,8 +10,7 @@ import (
 )
 
 type Claims struct {
-	UserID string `json:"user_id"`
-	Role   string `json:"role"`
+	UserID string `json:"userId"`
 	jwt.RegisteredClaims
 }
 
@@ -60,7 +59,6 @@ func AuthMiddleware(secretKey string) gin.HandlerFunc {
 		}
 
 		c.Set("userID", claims.UserID)
-		c.Set("userRole", claims.Role)
 		c.Next()
 	}
 }
