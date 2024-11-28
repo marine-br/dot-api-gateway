@@ -31,16 +31,16 @@ type Config struct {
 
 func LoadConfig() *Config {
 	validator := env_validator.NewEnvValidator()
-	rateLimitLimit, err := strconv.Atoi(validator.Default("RATE_LIMIT_LIMIT", "100"))
+	rateLimitLimit, err := strconv.Atoi(validator.Default("RATE_LIMIT_PER_WINDOW", "100"))
 
 	if err != nil {
-		panic(fmt.Errorf("failed to convert RATE_LIMIT_LIMIT to int: %w", err))
+		panic(fmt.Errorf("failed to convert RATE_LIMIT_PER_WINDOW to int: %w", err))
 	}
 
-	rateLimitWindow, err := strconv.Atoi(validator.Default("RATE_LIMIT_WINDOW", "60"))
+	rateLimitWindow, err := strconv.Atoi(validator.Default("RATE_LIMIT_WINDOW_SECONDS", "60"))
 
 	if err != nil {
-		panic(fmt.Errorf("failed to convert RATE_LIMIT_WINDOW to int: %w", err))
+		panic(fmt.Errorf("failed to convert RATE_LIMIT_WINDOW_SECONDS to int: %w", err))
 	}
 
 	cfg := &Config{
