@@ -1,5 +1,5 @@
 # Etapa de construção
-FROM golang:1.22.3 as builder
+FROM golang:1.23.3 as builder
 
 # Diretório de trabalho dentro do container
 WORKDIR /app
@@ -20,7 +20,7 @@ ENV GOPRIVATE=$GO_PRIVATE
 RUN go mod download
 
 # Compilando o projeto
-RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main .
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o main ./cmd
 
 # Etapa de execução
 FROM alpine:latest
