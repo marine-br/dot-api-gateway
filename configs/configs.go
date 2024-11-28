@@ -1,8 +1,6 @@
 package configs
 
 import (
-	"fmt"
-	"strconv"
 	"time"
 
 	_ "github.com/joho/godotenv/autoload"
@@ -31,17 +29,6 @@ type Config struct {
 
 func LoadConfig() *Config {
 	validator := env_validator.NewEnvValidator()
-	rateLimitLimit, err := strconv.Atoi(validator.Default("RATE_LIMIT_PER_WINDOW", "100"))
-
-	if err != nil {
-		panic(fmt.Errorf("failed to convert RATE_LIMIT_PER_WINDOW to int: %w", err))
-	}
-
-	rateLimitWindow, err := strconv.Atoi(validator.Default("RATE_LIMIT_WINDOW_SECONDS", "60"))
-
-	if err != nil {
-		panic(fmt.Errorf("failed to convert RATE_LIMIT_WINDOW_SECONDS to int: %w", err))
-	}
 
 	cfg := &Config{
 		Port:        validator.Default("APP_PORT", "8080"),
@@ -65,9 +52,9 @@ func LoadConfig() *Config {
 			Limit   int
 			Window  time.Duration
 		}{
-			Enabled: validator.Default("RATE_LIMIT_ENABLED", "true") == "true",
-			Limit:   rateLimitLimit,
-			Window:  time.Duration(rateLimitWindow) * time.Second,
+			Enabled: validator.DefaultBool("RATE_LIMIT_ENABLED", true),
+			Limit:   validator.DefaultInt("RATE_LIMIT_PER_WINDOW", 100),
+			Window:  time.Duration(validator.DefaultInt("RATE_LIMIT_WINDOW_SECONDS", 60)) * time.Second,
 		},
 	}
 

@@ -141,6 +141,8 @@ github.com/marine-br/golib-utils v1.303.0 h1:naqyN2uBTwa+ZfWdRml7K2NhiIj03wLjRQu
 github.com/marine-br/golib-utils v1.303.0/go.mod h1:fBIahR7pal9y7xsuQRotdGjkrQ1fBAQQFRiGQXs//Es=
 github.com/marine-br/golib-utils v1.304.0 h1:U0E8S9Gmq/81dRV+/fu4hMDxH4shpS2o4YicKnwpOlk=
 github.com/marine-br/golib-utils v1.304.0/go.mod h1:fBIahR7pal9y7xsuQRotdGjkrQ1fBAQQFRiGQXs//Es=
+github.com/marine-br/golib-utils v1.305.0 h1:Sh4xpULy5g0VhfpzOXcKlSds4bA6IbK9swgcKXthCJk=
+github.com/marine-br/golib-utils v1.305.0/go.mod h1:fBIahR7pal9y7xsuQRotdGjkrQ1fBAQQFRiGQXs//Es=
 github.com/mattn/go-colorable v0.0.9/go.mod h1:9vuHe8Xs5qXnSaW/c/ABM9alt+Vo+STaOChaDxuIBZU=
 github.com/mattn/go-colorable v0.1.4/go.mod h1:U0ppj6V5qS13XJ6of8GYAs25YV2eR4EVcfRqFIhoBtE=
 github.com/mattn/go-colorable v0.1.6/go.mod h1:u6P/XSegPjTcexA+o6vUJrdnUu04hMope9wVRipJSqc=
@@ -275,6 +277,7 @@ golang.org/x/sync v0.0.0-20190423024810-112230192c58/go.mod h1:RxMgew5VJxzue5/jJ
 golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20210220032951-036812b2e83c h1:5KslGYwFpkhGh+Q16bwMP3cOontH8FOep7tGV86Y7SQ=
 golang.org/x/sync v0.0.0-20210220032951-036812b2e83c/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
+golang.org/x/sync v0.2.0 h1:PUR+T4wwASmuSTYdKjYHI5TD22Wy5ogLU5qZCOLxBrI=
 golang.org/x/sync v0.2.0/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sys v0.0.0-20180823144017-11551d06cbcc/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
 golang.org/x/sys v0.0.0-20180905080454-ebe1bf3edb33/go.mod h1:STP8DvDyc/dI5b8T5hshtkjS+E42TnysNCUPdjciGhY=
